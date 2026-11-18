@@ -5,6 +5,7 @@ import com.example.aispringboot.DTO.command.UserLoginCommandDTO;
 import com.example.aispringboot.DTO.response.UserLoginResponseDTO;
 import com.example.aispringboot.common.Result;
 import com.example.aispringboot.entity.User;
+import com.example.aispringboot.exception.BusinessException;
 import com.example.aispringboot.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,8 @@ public class UserService {
 
         // 判断用户是否存在
         if (user == null) {
-
+            throw new BusinessException("用户不存在");
         }
-
         return null;
     }
 }

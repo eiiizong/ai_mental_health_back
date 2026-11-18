@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.aispringboot.enumClass.UserStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -80,9 +81,9 @@ public class User {
 
 
     /**
-     * 判断当前用户是否为普通用户
+     * 判断当前用户是否为正常状态
      */
-//    public boolean isUser() {
-//        return false;
-//    }
+    public boolean isActive() {
+        return UserStatus.NORMAL.getCode().equals(this.status);
+    }
 }

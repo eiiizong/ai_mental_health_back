@@ -19,12 +19,9 @@ public class User {
 
     @PostMapping("/login")
     public Result<UserLoginResponseDTO> login(@Valid @RequestBody UserLoginCommandDTO commandDTO) {
-
-
+        
         Result<UserLoginResponseDTO> result = userService.Login(commandDTO);
 
-
-        System.out.println(result);
         return result;
     }
 }

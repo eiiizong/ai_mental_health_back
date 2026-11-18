@@ -8,28 +8,44 @@ import com.example.aispringboot.entity.User;
 import com.example.aispringboot.exception.BusinessException;
 import com.example.aispringboot.mapper.UserMapper;
 import jakarta.annotation.Resource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     @Resource
     private UserMapper userMapper;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public Result<UserLoginResponseDTO> Login(UserLoginCommandDTO commandDTO) {
+        String username = commandDTO.getUsername().trim();
+        String password = commandDTO.getPassword().trim();
+
         // 构建查询条件
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getUsername, commandDTO.getUsername())
+        queryWrapper.eq(User::getUsername, username)
                 .or()
-                .eq(User::getEmail, commandDTO.getUsername());
+                .eq(User::getEmail, username);
 
         // 调用MP API查询
         User user = userMapper.selectOne(queryWrapper);
+        System.out.println("======================");
         System.out.println(user);
-
         // 判断用户是否存在
         if (user == null) {
             throw new BusinessException("用户不存在");
         }
+
+        // 验证密码
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BusinessException("密码不正确");
+        }
+
+        // 检查用户状态
+        if (!user.isActive()) {
+            throw new BusinessException("用户被禁用，请联系管理员");
+        }
+
         return null;
     }
 }

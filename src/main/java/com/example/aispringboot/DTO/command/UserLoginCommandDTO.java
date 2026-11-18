@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class UserLoginCommondDTO {
+public class UserLoginCommandDTO {
     @NotBlank(message = "用户名或邮箱不能为空！")
     @Size(max = 100, message = "用户名或邮箱不能为空")
     private String username;

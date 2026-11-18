@@ -1,4 +1,32 @@
 package com.example.aispringboot.DTO.response;
 
+import lombok.Data;
+
+@Data
 public class UserLoginResponseDTO {
+    private String token;
+    private String roleType;
+    private UserInfo userInfo;
+
+
+    @Data
+    public static class UserInfo {
+        private Long id;
+        private String username;
+        private String email;
+        private String nickname;
+        private String avatar;
+        private String phone;
+        private Integer gender;
+        private String genderDisplayName;
+        private String birthday;
+        private String userType;
+        private String userTypeDisplayName;
+        private Integer status;
+        private String statusDisplayName;
+        private String createdAt;
+        private String updatedAt;
+    }
+
+
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobarExceptionHandler {
     // 处理参数校验异常
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<String> handlerException(MethodArgumentNotValidException e) {

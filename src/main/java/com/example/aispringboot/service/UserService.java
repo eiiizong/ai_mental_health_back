@@ -29,8 +29,7 @@ public class UserService {
 
         // 调用MP API查询
         User user = userMapper.selectOne(queryWrapper);
-        System.out.println("======================");
-        System.out.println(user);
+         
         // 判断用户是否存在
         if (user == null) {
             throw new BusinessException("用户不存在");
